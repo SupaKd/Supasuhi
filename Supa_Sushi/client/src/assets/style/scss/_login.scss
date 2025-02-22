@@ -1,0 +1,81 @@
+#login, #register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    background-color: $secondary-color;
+    padding: $spacing-lg;
+}
+
+#login .auth, #register .auth {
+    background-color: $light-color;
+    padding: $spacing-xl;
+    border-radius: $border-radius-lg;
+    box-shadow: $box-shadow;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+#login h1, #register h1 {
+    font-size: 2.4rem;
+    color: $dark-color;
+    margin-bottom: $spacing-lg;
+}
+
+#login input, #register input {
+    width: 100%;
+    padding: $spacing-md;
+    margin-bottom: $spacing-md;
+    border: $border-width solid $border-color;
+    border-radius: $border-radius;
+    font-size: $font-size;
+    color: $dark-color;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#login input:focus, #register input:focus {
+    border-color: $primary-color;
+}
+
+#login button, #register button {
+    width: 100%;
+    padding: $btn-padding;
+    background-color: $btn-primary-bg;
+    color: $btn-primary-color;
+    border: none;
+    border-radius: $btn-border-radius;
+    font-size: $btn-font-size;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: $spacing-md;
+}
+
+#login button:hover, #register button:hover {
+    background-color: darken($btn-primary-bg, 10%);
+}
+
+#login p, #register p {
+    font-size: $font-size;
+    color: $gray-color;
+    margin-top: $spacing-md;
+}
+
+#login a, #register a {
+    color: $primary-color;
+    text-decoration: none;
+    font-weight: $font-weight-bold;
+    transition: color 0.3s ease;
+}
+
+#login a:hover, #register a:hover {
+    color: darken($primary-color, 10%);
+}
+
+#login .message,#register .message {
+    color: $danger-color;
+    font-size: $font-size;
+    margin-bottom: $spacing-md;
+}

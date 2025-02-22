@@ -1,0 +1,153 @@
+.cart {
+    padding: $spacing-lg;
+    max-width: $max-width;
+    margin: 0 auto;
+}
+
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    margin-bottom: $spacing-lg;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $light-color;
+    padding: $spacing-md;
+    border-radius: $border-radius-lg;
+    box-shadow: $box-shadow;
+}
+
+.product-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: $img-border-radius;
+    margin-right: $spacing-md;
+}
+
+.product-details {
+    flex: 1;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.product-details li {
+    font-size: $font-size;
+    color: $gray-color;
+    margin-bottom: $spacing-xs;
+}
+
+.product-details li:first-child {
+    font-weight: $font-weight-bold;
+    color: $dark-color;
+}
+
+.cart-item button {
+    background-color: $primary-color;
+    color: $btn-primary-color;
+    border: none;
+    border-radius: $border-radius;
+    padding: $spacing-xs $spacing-sm;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 $spacing-xs;
+}
+
+.cart-item button:hover {
+    background-color: darken($primary-color, 10%);
+}
+
+.cart-item .remove {
+    background-color: $warning-color;
+    color: $light-color;
+}
+
+.cart-item .remove:hover {
+    background-color: darken($danger-color, 10%);
+}
+
+.cart-item span {
+    font-size: $font-size;
+    color: $dark-color;
+    margin: 0 $spacing-xs;
+}
+
+.clear {
+    background-color: $warning-color;
+    color: $light-color;
+    padding: $btn-padding;
+    border: none;
+    border-radius: $btn-border-radius;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: $spacing-lg;
+}
+
+.clear:hover {
+    background-color: darken($danger-color, 10%);
+}
+
+.total-amount {
+    font-size: 1.8rem;
+    color: $dark-color;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacing-lg;
+}
+
+label {
+    font-size: $font-size;
+    color: $dark-color;
+    margin-bottom: $spacing-sm;
+    display: block;
+}
+
+select {
+    width: 100%;
+    padding: $spacing-md;
+    border: $border-width solid $border-color;
+    border-radius: $border-radius;
+    font-size: $font-size;
+    color: $dark-color;
+    margin-bottom: $spacing-lg;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+select:focus {
+    border-color: $primary-color;
+}
+
+.valid {
+    width: 100%;
+    padding: $btn-padding;
+    background-color: $success-color;
+    color: $light-color;
+    border: none;
+    border-radius: $btn-border-radius;
+    font-size: $btn-font-size;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.valid:hover {
+    background-color: darken($success-color, 10%);
+}
+
+.success-message {
+    font-size: $font-size;
+    color: $success-color;
+    margin-top: $spacing-md;
+    text-align: center;
+}
+
+.cart > p, label {
+    font-size: $font-size;
+    color: $dark-color;
+    text-align: center;
+    margin-top: $spacing-lg;
+}

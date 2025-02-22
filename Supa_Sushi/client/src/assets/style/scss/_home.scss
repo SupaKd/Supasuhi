@@ -1,0 +1,82 @@
+.home {
+    padding: $spacing-lg;
+    max-width: $max-width;
+    margin: 0 auto;
+}
+
+.home h1 {
+    font-size: 2.4rem;
+    color: $dark-color;
+    margin-bottom: $spacing-lg;
+}
+
+.filter-buttons {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-md;
+    margin-bottom: $spacing-lg;
+}
+
+.filter-buttons button {
+    padding: $btn-padding;
+    border-radius: $btn-border-radius;
+    font-size: $btn-font-size;
+    background-color: $btn-primary-bg;
+    color: $btn-primary-color;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.filter-buttons button:hover {
+    background-color: darken($btn-primary-bg, 10%);
+}
+
+.product-card {
+    background-color: $light-color;
+    border-radius: $border-radius-lg;
+    padding: $spacing-md;
+    margin-bottom: $spacing-md;
+    box-shadow: $box-shadow;
+    text-align: center;
+}
+
+.product-card h2 {
+    font-size: 2rem;
+    color: $dark-color;
+    margin-bottom: $spacing-sm;
+}
+
+.product-card img {
+    max-width: $img-max-width;
+    border-radius: $img-border-radius;
+    margin-bottom: $spacing-sm;
+}
+
+.product-card p {
+    font-size: $font-size;
+    color: $gray-color;
+    margin-bottom: $spacing-sm;
+}
+
+.product-card .price {
+    font-size: 1.8rem;
+    color: $dark-color;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacing-sm;
+}
+
+.AddToCartBtn {
+    padding: $btn-padding;
+    border-radius: $btn-border-radius;
+    font-size: $btn-font-size;
+    background-color: $btn-primary-bg;
+    color: $btn-primary-color;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.AddToCartBtn:hover {
+    background-color: darken($btn-primary-bg, 10%);
+}

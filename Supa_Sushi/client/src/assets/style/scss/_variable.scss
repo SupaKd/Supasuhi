@@ -1,0 +1,55 @@
+// 🎨 Couleurs principales
+$primary-color: #CBC7B7;
+$secondary-color: #F8FBFD;
+$danger-color: #BC1823;
+$dark-color: #1C2120;
+$success-color: #28a745;
+$warning-color: #ffc107;
+$info-color: #17a2b8;
+$light-color: #f8f9fa;
+$gray-color: #6c757d;
+
+// 🖋️ Typographie
+$font-family: 'Arial', sans-serif;
+$font-size: 1.6rem;
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+$line-height: 1.5;
+
+// 📏 Espacements
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+
+// 🎨 Bordures et ombrages
+$border-radius: 5px;
+$border-radius-lg: 10px;
+$border-width: 1px;
+$border-color: #ddd;
+$box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+
+// 📐 Dimensions
+$max-width: 1200px;
+$min-width:200px;
+$container-padding: 16px;
+
+// 🌐 Responsive breakpoints
+$breakpoint-xs: 480px;
+$breakpoint-sm: 768px;
+$breakpoint-md: 992px;
+$breakpoint-lg: 1200px;
+
+// 🛠️ Boutons
+$btn-padding: 10px 20px;
+$btn-border-radius: $border-radius;
+$btn-font-size: $font-size;
+$btn-primary-bg: $primary-color;
+$btn-primary-color: $dark-color;
+$btn-danger-bg: $danger-color;
+$btn-danger-color: #fff;
+
+// 🖼️ Images
+$img-border-radius: $border-radius;
+$img-max-width: 100%;

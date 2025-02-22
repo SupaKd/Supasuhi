@@ -1,0 +1,138 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff; 
+    box-shadow: $box-shadow;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; 
+  }
+  
+.logo {
+    font-weight: bold;
+    width: 40px;
+  }
+  
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+  }
+  
+.cart-link {
+    display: flex;
+    align-items: center;
+    gap: 5px; 
+    text-decoration: none;
+    color: $dark-color; 
+  }
+  
+  .burger-menu {
+    cursor: pointer;
+}
+
+/* Style pour les liens de navigation */
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: -100%; /* Cache le menu par défaut */
+    width: 90px; 
+    height: 100vh;
+    background-color: #fff;
+    box-shadow: -2px 0 4px rgba(0, 0, 0, 0.5);
+    padding-top: 60px;
+    z-index: 999;
+    text-align: center;
+}
+
+.nav-links.active {
+    right: 0;
+    padding-top: 0;
+}
+
+.nav-links a, .nav-links button {
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #000;
+    background-color: $light-color;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+}
+
+
+
+
+.footer {
+  background-color: $dark-color;
+  color: $light-color;
+  padding: $spacing-xl 0;
+  margin-top: auto; /* Pour pousser le footer en bas de la page si nécessaire */
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 $container-padding;
+  flex-wrap: wrap;
+  gap: $spacing-lg;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 200px;
+  max-width: 300px;
+  margin-bottom: $spacing-lg;
+  text-align: center;
+}
+
+.footer-section h3 {
+  font-size: 1.8rem;
+  margin-bottom: $spacing-md;
+  color: $primary-color;
+}
+
+.footer-section p,
+.footer-section ul {
+  font-size: $font-size;
+  color: $light-color;
+  line-height: $line-height;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: $spacing-xs;
+}
+
+.footer-section ul li a {
+  color: $light-color;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: $primary-color;
+}
+
+.footer-copyright {
+  text-align: center;
+  padding: $spacing-md 0;
+  border-top: 1px solid $gray-color;
+  margin-top: $spacing-lg;
+  font-size: $font-size;
+  color: $light-color;
+}

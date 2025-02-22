@@ -1,0 +1,71 @@
+.dashboard {
+    padding: $spacing-xl;
+    max-width: $max-width;
+    margin: 0 auto;
+}
+
+.dashboard h2 {
+    font-size: 2.4rem;
+    color: $dark-color;
+    margin-bottom: $spacing-lg;
+    text-align: center;
+}
+
+.dashboard section{
+    background-color: $light-color;
+    padding: $spacing-lg;
+    border-radius: $border-radius-lg;
+    box-shadow: $box-shadow;
+    margin-bottom: $spacing-lg;
+    text-align: center;
+}
+
+.dashboard h3 {
+    font-size: 1.8rem;
+    color: $dark-color;
+    margin-bottom: $spacing-md;
+}
+
+.dashboard p {
+    font-size: $font-size;
+    color: $gray-color;
+    margin-bottom: $spacing-sm;
+}
+
+.dashboard p strong {
+    color: $dark-color;
+    font-weight: $font-weight-bold;
+}
+
+.dashboard .cta {
+    display: inline-block;
+    padding: $btn-padding;
+    background-color: $primary-color;
+    color: $btn-primary-color;
+    text-decoration: none;
+    border-radius: $btn-border-radius;
+    font-size: $btn-font-size;
+    margin-top: $spacing-md;
+    transition: background-color 0.3s ease;
+}
+
+.dashboard .cta:hover {
+    background-color: darken($primary-color, 10%);
+}
+
+.dashboard button {
+    display: block;
+    padding: $btn-padding;
+    background-color: $primary-color;
+    color: $light-color;
+    border: none;
+    border-radius: $btn-border-radius;
+    font-size: $btn-font-size;
+    cursor: pointer;
+    margin-top: $spacing-md;
+    transition: background-color 0.3s ease;
+}
+
+.dashboard button:hover {
+    background-color: darken($danger-color, 10%);
+}
