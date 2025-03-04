@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 //import ProtectedRoute from "./ProtectedRoute";
+import AdminDashboard from "../pages/auth/admin/AdminDashboard"
 import Home from "../pages/Home";
 import Register from "../pages/auth/Register";
 import Login from "../pages/auth/Login";
@@ -27,7 +28,7 @@ function AppRoutes() {
 					//</ProtectedRoute>
 				}
 			/>
-
+			<Route path="/admindashboard" element={<AdminDashboard />} />
             <Route path="auth/register" element={<Register />} />
             <Route path="auth/login" element={<Login />} />
 			<Route path="cart" element={<Cart/>} />

@@ -6,6 +6,7 @@
     min-height: 80vh;
     background-color: $secondary-color;
     padding: $spacing-lg;
+    margin: auto;
 }
 
 #login .auth, #register .auth {
@@ -34,6 +35,7 @@
     color: $dark-color;
     outline: none;
     transition: border-color 0.3s ease;
+    background-color: #fff;
 }
 
 #login input:focus, #register input:focus {
@@ -54,7 +56,7 @@
 }
 
 #login button:hover, #register button:hover {
-    background-color: darken($btn-primary-bg, 10%);
+    background-color:$btn-primary-bg
 }
 
 #login p, #register p {
@@ -71,11 +73,19 @@
 }
 
 #login a:hover, #register a:hover {
-    color: darken($primary-color, 10%);
+    color: $primary-color;
 }
 
 #login .message,#register .message {
     color: $danger-color;
     font-size: $font-size;
     margin-bottom: $spacing-md;
+}
+
+.success {
+    color:$success-color;
+}
+
+.alert {
+    color:$danger-color;
 }

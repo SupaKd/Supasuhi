@@ -41,7 +41,7 @@
     display: inline-block;
     padding: $btn-padding;
     background-color: $primary-color;
-    color: $btn-primary-color;
+    color: #fff;
     text-decoration: none;
     border-radius: $btn-border-radius;
     font-size: $btn-font-size;
@@ -50,7 +50,7 @@
 }
 
 .dashboard .cta:hover {
-    background-color: darken($primary-color, 10%);
+    background-color: $hover-color;
 }
 
 .dashboard button {
@@ -67,5 +67,6 @@
 }
 
 .dashboard button:hover {
-    background-color: darken($danger-color, 10%);
+    background-color: $hover-color;
 }
+

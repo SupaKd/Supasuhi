@@ -18,27 +18,10 @@ class User {
 		return await pool.execute(UPDATE_USER, [...Object.values(userInfos)]);
 	}
 
-	static async delete(id, email, password) {
-        // Récupérer l'utilisateur avec son email et son mot de passe hashé
-        const GET_USER = "SELECT password FROM users WHERE id = ? AND email = ?";
-        const [rows] = await pool.execute(GET_USER, [id, email]);
-
-        if (rows.length === 0) {
-            throw new Error("Utilisateur introuvable ou email incorrect.");
-        }
-
-        const user = rows[0];
-
-        // Vérifier si le mot de passe est correct
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (!isPasswordValid) {
-            throw new Error("Mot de passe incorrect.");
-        }
-
-        // Si tout est OK, supprimer l'utilisateur
-        const DELETE_USER = "DELETE FROM users WHERE id = ?";
-        return await pool.execute(DELETE_USER, [id]);
-    }
+	static async delete(id) {
+		const DELETE_USER = "DELETE FROM users WHERE id = ?";
+		return await pool.execute(DELETE_USER, [id]);
+	}
 }
 
 

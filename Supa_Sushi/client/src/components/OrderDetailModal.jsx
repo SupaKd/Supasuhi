@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 function OrderDetail({ setToggleModal, order }) {
     if (!order) return null;
-    
+    console.log(order);
     return (
         <div className="modal-overlay" onClick={() => setToggleModal(false)}>
             <div
@@ -14,20 +14,36 @@ function OrderDetail({ setToggleModal, order }) {
                 <h2 id="order-details-title">
                     Votre commande n° {order.id}
                 </h2>
-                <p>
-                    <strong>Total :</strong> {order.total_price} €
-                </p>
+                
                 <p>
                     <strong>Status :</strong> {order.status}
                 </p>
-                <ul>
-                    {order.products.map((product) => (
-                        <li key={product.id}>
-                            {product.label} | quantité : {product.quantity} | prix
-                            unitaire : {product.unit_price} €
-                        </li>
-                    ))}
-                </ul>
+                <table>
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Quantité</th>
+                <th>Prix unitaire</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {order.products.map((product) => (
+                <tr key={product.id}>
+                    <td>{product.label}</td>
+                    <td>{product.quantity}</td>
+                    <td>{product.unit_price} €</td>
+                    <td>{product.quantity * product.unit_price} €</td>
+                </tr>
+            ))}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colSpan="3"><strong>Total :</strong></td>
+                <td><strong>{order.total_price} €</strong></td>
+            </tr>
+        </tfoot>
+    </table>
                 <button
                     aria-label="Close modal"
                     onClick={() => setToggleModal(false)}
@@ -44,7 +60,8 @@ OrderDetail.propTypes = {
     order: PropTypes.shape({                
         id: PropTypes.number.isRequired,     
         total_price: PropTypes.number.isRequired, 
-        status: PropTypes.string.isRequired, 
+        status: PropTypes.string.isRequired,
+        pickup_time: PropTypes.string.isRequired, 
         products: PropTypes.arrayOf(        
             PropTypes.shape({                
                 id: PropTypes.number.isRequired,  

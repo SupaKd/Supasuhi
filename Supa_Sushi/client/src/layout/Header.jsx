@@ -1,20 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faTimes, faCartShopping, faRightToBracket, faUser, faCircleUser, faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
-
-import { toggleMenu } from "../features/menuSlice";
 import { logout } from "../features/authSlice";
-import { toggleTheme } from "../features/themeSlice";  // Assurez-vous d'importer cette action
+import { toggleMenu } from "../features/menuSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faTimes, faCartShopping, faRightToBracket, faUser, faCircleUser } from "@fortawesome/free-solid-svg-icons";
 
 function Header() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const cart = useSelector((state) => state.cart);
-    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-    const { isLogged } = useSelector((state) => state.auth);
+    const { isLogged, infos } = useSelector((state) => state.auth);
     const { isMenuOpen } = useSelector((state) => state.menu);
-    const { isDark } = useSelector((state) => state.theme);  // Récupérer l'état du mode sombre
+    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
 
     async function handleLogout() {
         const res = await fetch("http://localhost:9000/api/v1/auth/logout", {
@@ -25,17 +22,11 @@ function Header() {
             dispatch(logout());
             navigate("/");
         }
-    }
+    };
 
     function handleClick() {
         dispatch(toggleMenu());
-    }
-
-    function handleToggleTheme() {
-        dispatch(toggleTheme());
-        console.log("Mode sombre activé :", isDark);
-          // Appeler l'action pour basculer le thème
-    }
+    };
 
     return (
         <header className="header">
@@ -46,9 +37,9 @@ function Header() {
             </div>
 
             <div className="header-right">
-                <NavLink to="cart" end className="cart-link">
-                    <FontAwesomeIcon icon={faCartShopping} />
-                    {totalItems ? <span>({totalItems})</span> : null}
+                <NavLink to="cart" end className="cart-link mobile-cart">
+                    <FontAwesomeIcon icon={faCartShopping} /> 
+                    {totalItems ? <span>({totalItems})</span> : null} 
                 </NavLink>
 
                 <div className="burger-menu" onClick={handleClick}>
@@ -56,33 +47,61 @@ function Header() {
                 </div>
             </div>
 
-            <nav className={`nav-links ${isMenuOpen ? "active" : ""}`}>
-                <button className="close-menu" onClick={handleClick}>
-                    <FontAwesomeIcon icon={faTimes} />
-                </button>
+        <nav className={`nav-links ${isMenuOpen ? "active" : ""}`}>
+            <button className="close-menu" onClick={handleClick}>
+                <FontAwesomeIcon icon={faTimes} />
+            </button>
 
-                {!isLogged ? (
-                    <NavLink to="auth/login" end onClick={handleClick} className="login-link">
-                        <FontAwesomeIcon icon={faCircleUser} />
+            {!isLogged ? (
+                <NavLink to="auth/login" end onClick={handleClick} className="login-link">
+                    <FontAwesomeIcon icon={faCircleUser} />
+                </NavLink>
+            ) : (
+                <>
+                    <NavLink to="dashboard" end onClick={handleClick}>
+                        <FontAwesomeIcon icon={faUser} className="user-link" />
                     </NavLink>
-                ) : (
-                    <>
-                        <NavLink to="dashboard" end onClick={handleClick}>
-                            <FontAwesomeIcon icon={faUser} className="user-link" />
-                        </NavLink>
-                        <button onClick={handleLogout}>
-                            <FontAwesomeIcon icon={faRightToBracket} />
-                        </button>
-                    </>
+                    <button onClick={handleLogout}>
+                        <FontAwesomeIcon icon={faRightToBracket} />
+                    </button>
+            {infos?.role === "admin" && (
+                    <button onClick={() => navigate("/admindashboard")} className="admin-link">
+                        <span className="nav-text">Admin Dashboard</span>
+                    </button>
                 )}
+                </>
+            )}
+        </nav>
 
-                {/* Ajout du bouton pour basculer le mode sombre */}
-                <button onClick={handleToggleTheme} className="theme-toggle">
-                    <FontAwesomeIcon icon={isDark ? faSun : faMoon} />
+    {/* Section pour les écrans de tablette et de bureau */}
+        <section className="desktop-nav">
+                <NavLink to="cart" end className="cart-link desktop-cart">
+                    <FontAwesomeIcon icon={faCartShopping} /> 
+                    {totalItems ? <span>({totalItems})</span> : null} 
+                </NavLink>
+
+            {!isLogged ? (
+                <NavLink to="auth/login" end className="login-link">
+                    <span className="nav-text">Se connecter</span>
+                </NavLink>
+            ) : (
+            <>
+                <NavLink to="dashboard" end>
+                    <span className="nav-text">Profil</span>
+                </NavLink>
+                <button onClick={handleLogout}>
+                    <span className="nav-text">Se déconnecter</span>
                 </button>
-            </nav>
-        </header>
+            {infos?.role === "admin" && (
+                <button onClick={() => navigate("/admindashboard")} className="admin-link">
+                    <span className="nav-text">Admin Dashboard</span>
+                </button>
+            )}
+            </>
+            )}
+        </section>
+    </header>
     );
-}
+};
 
 export default Header;

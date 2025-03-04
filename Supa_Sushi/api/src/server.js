@@ -17,7 +17,7 @@ app.use(
 	cors({
 		origin: ["http://localhost:5173"], // Origines autorisées
 		credentials: true,                                          // Autorise l'envoi de cookies dans les requêtes
-		methods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],     // Méthodes HTTP autorisées
+		methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],     // Méthodes HTTP autorisées
 		allowedHeaders: ["Content-Type", "Accept"], // En-têtes HTTP autorisés
 	})
 );

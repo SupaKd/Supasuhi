@@ -1,12 +1,14 @@
 @import "variable";
-@import "mixins";
+//@import "mixins";
 @import "base";
+//@import "darkmode";
+
 @import "layout";
 
 @import "modal";
-@import "form";
+//@import "form";
 
-@import "home";
 @import "cart";
-@import "dashboard";
+//@import "home";
+//@import "dashboard";
 @import "login";

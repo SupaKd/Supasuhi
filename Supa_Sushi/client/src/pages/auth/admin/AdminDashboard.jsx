@@ -1,189 +1,100 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setUsers, deleteUser, setProducts, deleteProduct } from "../../../features/adminSlice";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import OrderDetail from "../../../components/OrderDetailModal";
 
 function AdminDashboard() {
-    const dispatch = useDispatch();
-    const { users, products, loading, error } = useSelector((state) => state.admin);
+    const { infos } = useSelector((state) => state.auth);
+    const [orders, setOrders] = useState([]);
+    const [sortedOrders, setSortedOrders] = useState([]);
+    const [orderDetail, setOrderDetail] = useState(null);
+    const [toggleModal, setToggleModal] = useState(false);
+    const [sortBy, setSortBy] = useState("recent");
 
-    const [showUsers, setShowUsers] = useState(false);
-    const [showProducts, setShowProducts] = useState(false);
-  
-    async function fetchUsers() {
-        dispatch(setLoading(true));
-        try {
-            const response = await fetch("http://localhost:9000/api/v1/users", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                credentials: "include",
-            });
-
-            const data = await response.json();
-
-            if (!data.datas || data.datas.length === 0) {
-                dispatch(setError("Aucun utilisateur disponible."));
-            } else {
-                dispatch(setUsers(data.datas));
-            }
-        } catch (error) {
-            dispatch(setError(error.message));
-        } finally {
-            dispatch(setLoading(false));
-        }
-    }
-
-    async function fetchProducts() {
-        dispatch(setLoading(true));
-        try {
-            const response = await fetch("http://localhost:9000/api/v1/products", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                credentials: "include",
-            });
-
-            const data = await response.json();
-
-            if (!data.datas || data.datas.length === 0) {
-                dispatch(setError("Aucun produit disponible."));
-            } else {
-                dispatch(setProducts(data.datas));
-            }
-        } catch (error) {
-            dispatch(setError(error.message));
-        } finally {
-            dispatch(setLoading(false));
-        }
-    }
-
-    async function handleDeleteUser(userId) {
-        if (window.confirm("Êtes-vous sûr de vouloir supprimer cet utilisateur ?")) {
-            dispatch(setLoading(true));
+    useEffect(() => {
+        async function fetchOrders() {
             try {
-                await fetch(`http://localhost:9000/api/v1/admin/${userId}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    credentials: 'include',
+                const res = await fetch("http://localhost:9000/api/v1/admin/orders", {
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
                 });
-                dispatch(deleteUser(userId));
+                const data = res.ok ? await res.json() : { orders: [] };
+                setOrders(data.orders);
             } catch (error) {
-                dispatch(setError(error.message));
-            } finally {
-                dispatch(setLoading(false));
+                console.error("Error fetching orders", error);
+                setOrders([]);
             }
         }
-    }
+        fetchOrders();
+    }, []);
 
-    async function handleDeleteProduct(productId) {
-        if (window.confirm("Êtes-vous sûr de vouloir supprimer ce produit ?")) {
-            try {
-                await fetch(`http://localhost:9000/api/v1/products/${productId}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    credentials: 'include',
-                });
-                dispatch(deleteProduct(productId));
-            } catch (err) {
-                dispatch(setError("Erreur lors de la suppression du produit"));
-            }
+    useEffect(() => {
+        async function sortOrders() {
+            const sorted = [...orders].sort((a, b) => {
+                switch (sortBy) {
+                    case "oldest": return new Date(a.created_at) - new Date(b.created_at);
+                    case "totalAsc": return a.total_price - b.total_price;
+                    case "totalDesc": return b.total_price - a.total_price;
+                    default: return new Date(b.created_at) - new Date(a.created_at);
+                }
+            });
+            setSortedOrders(sorted);
         }
-    }
+        sortOrders();
+    }, [orders, sortBy]);
 
+    if (!orders.length) return <p>Chargement des commandes...</p>;
 
     return (
         <main className="dashboard">
-            <h1>Dashboard Administrateur</h1>
-            {loading && <p>Chargement...</p>}
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-
-            <button onClick={() => { setShowUsers(!showUsers); if (!showUsers) fetchUsers(); }}>
-                {showUsers ? "Masquer la liste des utilisateurs" : "Afficher la liste des utilisateurs"}
-            </button>
-            <button onClick={() => { setShowProducts(!showProducts); if (!showProducts) fetchProducts(); }}>
-                {showProducts ? "Masquer la liste des produits" : "Afficher la liste des produits"}
-            </button>
-
-            {showProducts && (
-                <>
-                    <h2>Liste des produits</h2>
-                    
-                    {products.length > 0 ? (
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nom</th>
-                                    <th>Description</th>
-                                    <th>Prix</th>
-                                    <th>Stock</th>
-                                    <th>Catégorie</th>
-                                    <th>Action</th>
+            {toggleModal && <OrderDetail setToggleModal={setToggleModal} order={orderDetail} />}
+            <h2>Admin Dashboard</h2>
+            <section>
+                <h3>Commandes des utilisateurs</h3>
+                <label>Filtrer par : </label>
+                <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+                    <option value="recent">Plus récentes</option>
+                    <option value="oldest">Plus anciennes</option>
+                    <option value="totalAsc">Prix croissant</option>
+                    <option value="totalDesc">Prix décroissant</option>
+                </select>
+                {sortedOrders.length > 0 ? (
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Num.Com</th>
+                                <th>Commandé le</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {sortedOrders.map((order) => (
+                                <tr key={order.id}>
+                                    <td>{order.id}</td>
+                                    <td>{new Date(order.created_at).toLocaleDateString()}</td>
+                                    <td>{new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(order.total_price)}</td>
+                                    <td>
+                                        <select
+                                            value={order.status}
+                                            onChange={(e) => handleUpdateStatus(order.id, e.target.value)}
+                                        >
+                                            <option value="en attente">En attente</option>
+                                            <option value="Prête">Prête</option>
+                                            <option value="Annulé">Annulé</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <button onClick={() => handleGetDetail(order.id)}>Voir</button>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                {products.map((product) => (
-                                    <tr key={product.id}>
-                                        <td>{product.id}</td>
-                                        <td>{product.label}</td>
-                                        <td>{product.description}</td>
-                                        <td>{product.price} €</td>
-                                        <td>{product.stock}</td>
-                                        <td>{product.category_id}</td>
-                                        <td>
-                                            <button onClick={() => handleDeleteProduct(product.id)}>Supprimer</button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    ) : (
-                        <p>Aucun produit trouvé.</p>
-                    )}
-                </>
-            )}
-
-            {showUsers && (
-                <>
-                    <h2>Liste des utilisateurs</h2>
-                    {users.length > 0 ? (
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Prénom</th>
-                                    <th>Nom</th>
-                                    <th>Email</th>
-                                    <th>Rôle</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {users.map((user) => (
-                                    <tr key={user.id}>
-                                        <td>{user.id}</td>
-                                        <td>{user.firstname}</td>
-                                        <td>{user.lastname}</td>
-                                        <td>{user.email}</td>
-                                        <td>{user.role}</td>
-                                        <td>
-                                            <button onClick={() => handleDeleteUser(user.id)}>Supprimer</button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    ) : (
-                        <p>Aucun utilisateur trouvé.</p>
-                    )}
-                </>
-            )}
+                            ))}
+                        </tbody>
+                    </table>
+                ) : (
+                    <p>Aucune commande trouvée.</p>
+                )}
+            </section>
         </main>
     );
 }

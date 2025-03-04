@@ -71,3 +71,9 @@ http://localhost:9000/api/v1/users/order inserer une commande avec des produits 
 
 recuperer tout les utilisateur en tant qu'admin
 http://localhost:9000/api/v1/admin
+
+modifier le status de la commande
+http://localhost:9000/api/v1/admin/orders/26/status
+{
+  "status": "Prête"
+}

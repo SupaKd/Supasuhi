@@ -6,10 +6,8 @@ import { login } from "../../features/authSlice";
 function Login() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-
 	const emailRef = useRef();
 	const passRef = useRef();
-
 	const [message, setMessage] = useState("");
 
 	async function handleSubmit(e) {
@@ -17,21 +15,21 @@ function Login() {
 		const email = emailRef.current.value;
 		const password = passRef.current.value;
 	
-		// console.log("🟡 Tentative de connexion avec :", { email, password });
+		// console.log("Tentative de connexion avec :", { email, password });
 	
 		if (email.length && password.length) {
 			try {
 				const res = await fetch("http://localhost:9000/api/v1/auth/login", {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
-					credentials: "include", // 🔥 Assure-toi que le cookie est bien envoyé
+					credentials: "include", 
 					body: JSON.stringify({ email, password }),
 				});
 	
 				// console.log("🔵 Réponse du serveur :", res);
 	
 				const resJSON = await res.json();
-				console.log("🟢 Contenu de la réponse JSON :", resJSON);
+				//console.log("🟢 Contenu de la réponse JSON :", resJSON);
 	
 				if (res.ok) {
 					setMessage(resJSON.msg);
@@ -42,36 +40,34 @@ function Login() {
 					} else {
 						navigate("/");
 					}
-				} else {
-					setMessage(resJSON.msg || "Erreur de connexion");
+					} else {
+						setMessage(resJSON.msg || "Erreur de connexion");
+					}
+					} catch (error) {
+					// console.error("Erreur serveur :", error);
+						setMessage("Erreur serveur");
+					}
+					} else {
+						setMessage("Identifiants requis");
 				}
-			} catch (error) {
-				// console.error("🔴 Erreur serveur :", error);
-				setMessage("Erreur serveur");
-			}
-		} else {
-			setMessage("Identifiants requis");
-		}
-	};
+			};
 	
-	
-
 	return (
 		<main id="login">
 			<form onSubmit={handleSubmit} className="auth">
 				<h1>Connexion</h1>
-				<input
-					type="text"
-					ref={emailRef}
-					placeholder="Entrer votre email"
-				/>
-				<input
-					type="password"
-					ref={passRef}
-					placeholder="Entrer votre mot de passe"
-				/>
+					<input
+						type="text"
+						ref={emailRef}
+						placeholder="Entrer votre email"
+					/>
+					<input
+						type="password"
+						ref={passRef}
+						placeholder="Entrer votre mot de passe"
+					/>
 
-				{message && <p>{message}</p>}
+					{message && <p>{message}</p>}
 
 				<button type="submit">Se connecter</button>
 			</form>
@@ -81,6 +77,6 @@ function Login() {
 			</p>
 		</main>
 	);
-}
+};
 
 export default Login;

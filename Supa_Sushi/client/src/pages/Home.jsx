@@ -31,10 +31,10 @@ function Home() {
     }, []);
 
     function handleImage(product) {
-		if (product.image_urls[0]) {
-			return "/img/" + product.image_urls[0];
-		} else return notFoundImg;
-	};
+        if (product.image_urls[0]) {
+            return "/img/" + product.image_urls[0];
+        } else return notFoundImg;
+    };
 
     const filterByCategory = (categoryId) => {
         setFilteredCategory(categoryId);
@@ -44,21 +44,21 @@ function Home() {
         ? products?.filter(product => product.category_id === filteredCategory)
         : products;
 
-    if (error) return <p>{error}</p>;
+    if (error) return <p>Erreur : {error}</p>;
     if (!products) return <p>Chargement ...</p>;
 
     return (
         <main className="home">
             <h1>Bienvenue {firstname}</h1>
-            
-            <section>                
+
+            <section>
                 <div className="filter-buttons">
                     <button onClick={() => setFilteredCategory(null)}>Tous</button>
                     <button onClick={() => filterByCategory(1)}>Sushi</button>
                     <button onClick={() => filterByCategory(2)}>Maki</button>
                     <button onClick={() => filterByCategory(3)}>Ramen</button>
                 </div>
-                
+
                 {filteredProducts.map((product) => (
                     <article key={product.id} className="product-card">
                         <h2>{product.label}</h2>

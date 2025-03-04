@@ -59,16 +59,16 @@
 }
 
 .cart-item button:hover {
-    background-color: darken($primary-color, 10%);
+    background-color: $hover-color;
 }
 
 .cart-item .remove {
-    background-color: $warning-color;
+    background-color: $gray-color;
     color: $light-color;
 }
 
 .cart-item .remove:hover {
-    background-color: darken($danger-color, 10%);
+    background-color:$danger-color;
 }
 
 .cart-item span {
@@ -78,7 +78,7 @@
 }
 
 .clear {
-    background-color: $warning-color;
+    background-color: $gray-color;
     color: $light-color;
     padding: $btn-padding;
     border: none;
@@ -89,7 +89,7 @@
 }
 
 .clear:hover {
-    background-color: darken($danger-color, 10%);
+    background-color:$danger-color;
 }
 
 .total-amount {
@@ -135,7 +135,7 @@ select:focus {
 }
 
 .valid:hover {
-    background-color: darken($success-color, 10%);
+    background-color:$success-color;
 }
 
 .success-message {

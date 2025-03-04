@@ -1,96 +1,149 @@
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #fff; 
-    box-shadow: $box-shadow;
-    position: fixed; 
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000; 
-  }
-  
-.logo {
-    font-weight: bold;
-    width: 40px;
-  }
-  
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 10px; 
-  }
-  
-.cart-link {
-    display: flex;
-    align-items: center;
-    gap: 5px; 
-    text-decoration: none;
-    color: $dark-color; 
-  }
-  
-  .burger-menu {
-    cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: $primary-color; 
+  box-shadow: $box-shadow;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; 
 }
 
-/* Style pour les liens de navigation */
+.logo {
+  font-weight: bold;
+  width: 40px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+}
+
+.mobile-cart {
+  display: flex;
+  align-items: center;
+  gap: 5px; 
+  text-decoration: none;
+  color: $secondary-color; 
+}
+
+.mobile-cart:hover {
+  color: $hover-color;
+}
+
+.burger-menu {
+  cursor: pointer;
+  color: $secondary-color;
+}
+
+.burger-menu:hover {
+  color: $hover-color;
+}
+
 .nav-links {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 0;
-    right: -100%; /* Cache le menu par défaut */
-    width: 90px; 
-    height: 100vh;
-    background-color: #fff;
-    box-shadow: -2px 0 4px rgba(0, 0, 0, 0.5);
-    padding-top: 60px;
-    z-index: 999;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  right: -100%; 
+  width: 90px; 
+  height: 100vh;
+  background-color: $primary-color;
+  box-shadow: -2px 0 4px rgba(0, 0, 0, 0.5);
+  padding-top: 60px;
+  z-index: 999;
+  text-align: center;
 }
 
 .nav-links.active {
-    right: 0;
-    padding-top: 0;
+  right: 0;
+  padding-top: 0;
 }
 
 .nav-links a, .nav-links button {
-    padding: 15px 20px;
+  padding: 15px 20px;
+  text-decoration: none;
+  color: $secondary-color;
+  background-color: $primary-color;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  display: block;
+}
+
+.nav-links:hover {
+  color: $hover-color;
+}
+
+.desktop-nav {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .burger-menu {
+    display: none;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .desktop-nav a, .desktop-nav button {
     text-decoration: none;
-    color: #000;
-    background-color: $light-color;
+    color: $secondary-color;
+    background-color: $primary-color;
     border: none;
     cursor: pointer;
     text-align: center;
     display: block;
+    font-size: $font-size;
+  }
+
+  .desktop-nav a:hover, .desktop-nav button:hover {
+    color: $hover-color;
+  }
+
+  .mobile-cart {
+    display: none;
+  }
+
+  .desktop-cart {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: auto; 
+  }
 }
 
-
-
-
 .footer {
-  background-color: $dark-color;
+  background-color: $primary-color;
   color: $light-color;
   padding: $spacing-xl 0;
-  margin-top: auto; /* Pour pousser le footer en bas de la page si nécessaire */
+  text-align: center; /* Centrer le contenu sur mobile */
 }
 
 .footer-content {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column; /* Empiler les sections sur mobile */
+  gap: $spacing-lg; /* Espacement entre les sections */
   max-width: $max-width;
   margin: 0 auto;
   padding: 0 $container-padding;
-  flex-wrap: wrap;
-  gap: $spacing-lg;
 }
 
 .footer-section {
   flex: 1;
   min-width: 200px;
-  max-width: 300px;
   margin-bottom: $spacing-lg;
   text-align: center;
 }
@@ -98,7 +151,7 @@
 .footer-section h3 {
   font-size: 1.8rem;
   margin-bottom: $spacing-md;
-  color: $primary-color;
+  color: $secondary-color;
 }
 
 .footer-section p,
@@ -125,7 +178,7 @@
 }
 
 .footer-section ul li a:hover {
-  color: $primary-color;
+  color: $hover-color;
 }
 
 .footer-copyright {
@@ -135,4 +188,38 @@
   margin-top: $spacing-lg;
   font-size: $font-size;
   color: $light-color;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center; 
+  gap: 15px; 
+}
+
+.social-icons a:hover {
+  color:$hover-color;
+}
+
+/* Styles pour tablette */
+@media (min-width: 768px) {
+  .footer-content {
+      flex-direction: row; 
+      justify-content: space-around; 
+      text-align: left; 
+  }
+
+  .footer-section {
+      margin-bottom: 0; 
+  }
+}
+
+/* Styles pour desktop */
+@media (min-width: 1024px) {
+  .footer-content {
+      max-width: 1200px; 
+  }
+
+  .footer-section {
+      max-width: 300px; 
+  }
 }

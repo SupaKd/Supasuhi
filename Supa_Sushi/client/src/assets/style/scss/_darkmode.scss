@@ -1,12 +1,4 @@
-
-  
-  /* Mode sombre */
-  .dark {
-    background-color: #1e1e1e;
-    color: #ffffff;
-  }
-  
-  /* Style du bouton dans le menu burger */
+ /* Style du bouton dans le menu burger */
   .theme-toggle {
     background: none;
     border: none;
@@ -17,100 +9,41 @@
   }
   
   .theme-toggle:hover {
-    color: #f39c12; /* Une couleur dorée au survol */
+    color: $warning-color; 
   }
     
-  /* ==========================
-     🌙 Mode Sombre
-     ========================== */
-     .dark body, .dark html {
-      background-color: #121212;
-      color: #ffffff;
-  }
-  
-  /* ✅ Header */
-  .header {
-      background-color: #ffffff;
-      color: #000000;
-      padding: 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
+  // HEADER
   .dark .header {
-      background-color: #1e1e1e;
-      color: #ffffff;
+      background-color: $dark-primary-color;
+      color: $light-color;
+  }
+  //BURGER
+  .dark nav{
+    background-color: $dark-primary-color;
+  }
+  .dark nav button, .dark nav a{
+    background-color: $dark-primary-color;
+    color:$light-color
+
+  }
+
+  //MAIN
+  .dark main,.dark article, .dark footer  {
+      background-color: $dark-primary-color;
+      color: $light-color;
   }
   
-  /* ✅ Contenu principal */
-  main {
-      padding: 20px;
-      transition: background-color 0.3s ease, color 0.3s ease;
+  //ARTICLE
+   .dark main {
+      background-color: $dark-secondary-color;
+      
+  }
+
+  .dark h1, .dark p {
+    color:#fff
   }
   
-  .dark main {
-      background-color: #1a1a1a;
-      color: #ffffff;
-  }
+
   
-  /* ✅ Sections */
-  section {
-      background-color: #f8f8f8;
-      padding: 20px;
-      margin: 10px 0;
-      border-radius: 8px;
-      transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  .dark section {
-      background-color: #222222;
-      color: #ffffff;
-  }
-  
-  /* ✅ Liens */
-  a {
-      text-decoration: none;
-      color: inherit;
-      transition: color 0.3s ease;
-  }
-  
-  a:hover {
-      color: #f39c12;
-  }
-  
-  /* ✅ Boutons */
-  button {
-      background: none;
-      border: 1px solid #000000;
-      padding: 8px 12px;
-      cursor: pointer;
-      transition: background 0.3s ease, color 0.3s ease;
-  }
-  
-  .dark button {
-      border-color: #ffffff;
-      color: #ffffff;
-  }
-  
-  button:hover {
-      background: #f39c12;
-      color: #ffffff;
-  }
-  
-  /* ✅ Formulaires */
-  input, textarea {
-      background-color: #ffffff;
-      color: #000000;
-      border: 1px solid #ccc;
-      padding: 8px;
-      transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  .dark input, .dark textarea {
-      background-color: #333333;
-      color: #ffffff;
-      border: 1px solid #555;
-  }
+
   

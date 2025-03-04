@@ -65,31 +65,25 @@ const update = async (req, res, next) => {
 };
 
 const remove = async (req, res, next) => {
-    try {
-       
-        const userId = req.params.userId || req.user.userId;
-
-        const [response] = await User.delete(userId);
-
-        if (response.affectedRows) {
-            if (req.user.userId === userId) {
-                res.clearCookie("jwt", {
-                    httpOnly: true,
-                    secure: process.env.NODE_ENV === "production",
-                    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-                });
-            }
-            res.json({ message: "Compte supprimé." });
-            return;
-        }
-
-        res.status(400).json({
-            message: "Cet compte n'existe pas.",
-        });
-        return;
-    } catch (error) {
-        next(error);
-    }
+	try {
+		const [response] = await User.delete(req.user.userId);
+		if (response.affectedRows) {
+			res.clearCookie("jwt", {
+				httpOnly: true,
+				secure: process.env.NODE_ENV === "production",
+				sameSite:
+					process.env.NODE_ENV === "production" ? "none" : "lax",
+			});
+			res.json({ message: "Compte supprimé." });
+			return;
+		}
+		res.status(400).json({
+			message: "Cet compte n'existe pas.",
+		});
+		return;
+	} catch (error) {
+		next(error);
+	}
 };
 
 export { getAll, getInfos, update, remove };
